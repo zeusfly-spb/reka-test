@@ -19,8 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['auth'])->name('dashboard');
-Route::post('/create', [HomeController::class, 'create'])->middleware(['auth'])->name('create');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'index']);
+    Route::post('/create', [HomeController::class, 'create']);
+    Route::get('/all', [HomeController::class, 'all']);
+});
 
 require __DIR__.'/auth.php';
 

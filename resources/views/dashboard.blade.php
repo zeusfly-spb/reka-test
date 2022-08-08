@@ -87,6 +87,7 @@
         </div>
 
         <script>
+            let ownItems = []
             const itemModal = document.getElementById('itemModal')
             let mode = null
             itemModal.addEventListener('show.bs.modal', e => {
@@ -111,22 +112,31 @@
                 }
             })
 
-            function create (content) {
+            const create = content => {
                 $.ajax({
                     type: 'POST',
-                    url: '/create',
+                    url: '/creat',
                     data: { "content": content, "_token": "{{ csrf_token() }}" },
-                    success: function (response) {
-                        console.log(response)
+                    success: res => {
+                        console.log(res)
                     },
-                    error: function (xhr, exception) {
-                        console.log('Query error' + exception)
+                    error: (xhr, e) => {
+                        console.log('Query error ' + e)
                     }
                 })
             }
 
+            const loadAll = () => {
+                $.ajax({
+                    type: 'GET',
+                    url: '/all',
+                    success: res => ownItems = res.data,
+                    error: (xhr, e) => console.error(e)
+                })
+            }
+
             $(() => {
-                console.log('Hello world! Page loaded')
+                loadAll()
             })
 
         </script>

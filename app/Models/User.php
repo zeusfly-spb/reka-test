@@ -50,6 +50,10 @@ class User extends Authenticatable
         return $this->hasMany(Item::class);
     }
 
+    /**
+     * @param string $content
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function addItem(string $content)
     {
         return $this->items()->create(['content' => $content]);
