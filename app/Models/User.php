@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Item::class);
     }
+
+    public function addItem(string $content)
+    {
+        return $this->items()->create(['content' => $content]);
+    }
 }

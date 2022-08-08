@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::post('/create', [HomeController::class, 'create'])->middleware(['auth'])->name('create');
 
 require __DIR__.'/auth.php';
 
