@@ -88,5 +88,21 @@
 
         <script src="{{asset('js/engine.js')}}"></script>
 
+        <script>
+            const create = content => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/create',
+                    data: { "content": content, "_token": "{{ csrf_token() }}" },
+                    success: res => {
+                        prependOwnItem(res.data)
+                    },
+                    error: (xhr, e) => {
+                        console.log('Query error ' + e)
+                    }
+                })
+            }
+        </script>
+
     </div>
 @endsection
